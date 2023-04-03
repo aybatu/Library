@@ -4,11 +4,12 @@
  */
 package Model.Entities;
 
+
 /**
  *
  * @author aybatukerkukluoglu
  */
-public class Student {
+public class Student implements Comparable<Student> {
     //PROPERTIES OF A STUDENT
     private int id;
     private String firstName;
@@ -58,6 +59,15 @@ public class Student {
         return address;
     }
     
+    @Override
+    public int compareTo(Student o) {
+        return toString().compareTo(o.toString()); 
+    }
     
+    @Override
+    public String toString() {
+        return this.firstName + " " + this.lastName;
+    }
+
     
 }

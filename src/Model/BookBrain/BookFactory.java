@@ -9,7 +9,6 @@ import Model.Sorting;
 import Model.Entities.Book;
 import Utils.Constant;
 import Utils.FileReaderScanner;
-
 import Utils.Utils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,7 +42,7 @@ public class BookFactory {
         //a new Book array list stored in bookList.
         List<Book> bookList = new ArrayList<>();
         //a new book bookArr assigned to list of books created by a txt file.
-        Book[] bookArr = retriveBookList(Constant.Book.bookListFile);
+        Book[] bookArr = retrieveBookList(Constant.Book.bookListFile);
         //A new BubbleSort object.
         Sorting bSort = new BubbleSort();
         
@@ -60,7 +59,7 @@ public class BookFactory {
      * @param fileName File name to read for the information.
      * @return a Book object array
      */
-    private Book[] retriveBookList(String fileName) {
+    private Book[] retrieveBookList(String fileName) {
         //New file reader scanner object address stored in "fR"
         FileReaderScanner fR = new FileReaderScanner(fileName);
         //new utils object.
