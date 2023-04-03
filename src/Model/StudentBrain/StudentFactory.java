@@ -29,9 +29,9 @@ public class StudentFactory {
     //Author last name index
     private static final int sLIndex = 1;
     //author first name index.
-    private static final int sFIndx = 2;
+    private static final int sFIndex = 2;
     //book title start index.
-    private static final int sAddIndx = 3;
+    private static final int sAddIndex = 3;
 
     /**
      * The method creates a sorted Student ArrayList by student name.
@@ -80,13 +80,13 @@ public class StudentFactory {
             String studentID = studentInfo[studentIDIndex];
             int sID = Integer.parseInt(studentID);
             //Student first name stored to sFN retrieved from the txt file.
-            String sFN = studentInfo[sLIndex];
+            String sFN = studentInfo[sFIndex];
              //Student last name stored to sLN retrieved from the txt file.
-            String sLN = studentInfo[sLIndex] + " " + studentInfo[sFIndx];
+            String sLN = studentInfo[sLIndex];
             //sAdd assigned to student address retrieved from the txt file.
             String sAdd = "";
             //A simple for loop checks for the rest of the indexes of studnetInfo array.
-            for (int j = sAddIndx; j < studentInfo.length; j++) {
+            for (int j = sAddIndex; j < studentInfo.length; j++) {
                 //If the index of the array is last one addes it to 'sAdd' without a space.
                 if (j == studentInfo.length - 1) {
                     sAdd += studentInfo[j].trim();
