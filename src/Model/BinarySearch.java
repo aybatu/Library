@@ -11,7 +11,7 @@ import java.util.List;
  * @author aybatukerkukluoglu
  */
 public class BinarySearch implements Search {
-         /**
+     /**
      * Implements binary search for requested target
      * @param list object array list to search through.
      * @param target is the object to search.
@@ -26,7 +26,7 @@ public class BinarySearch implements Search {
             //mid point found by start point added up to end point and divided by two.
             int mid = (start + end) / 2;
             //compare value checks the middle object by assigned toString return by target value.
-            int comValue = target.toLowerCase().compareTo(list.get(mid).toString().toLowerCase());
+            int comValue = target.toLowerCase().compareTo(list.get(mid).toString());
             
             //if compared value is "0" the compared elements are the same ones.
             if(comValue == 0) {

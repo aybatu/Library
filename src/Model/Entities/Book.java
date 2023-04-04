@@ -4,6 +4,8 @@
  */
 package Model.Entities;
 
+import Utils.Constant;
+
 /**
  *
  * @author aybatukerkukluoglu
@@ -54,7 +56,7 @@ public class Book implements Comparable<Book>{
      */
     @Override
     public int compareTo(Book o) {
-        return toString().compareTo(o.toString());
+        return toString().compareTo(o.toString().toLowerCase());
     }
 
     /**
@@ -63,7 +65,11 @@ public class Book implements Comparable<Book>{
      */
     @Override
     public String toString() {
-        return authorFN;
+        if(Constant.BookSearch.byAuthor) {
+            return authorFN.toLowerCase();
+        } else {
+            return title.toLowerCase();
+        }
     }
 
     

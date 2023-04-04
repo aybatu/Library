@@ -101,7 +101,7 @@ public class Utils {
                 myKB.next(); //Gets new line to check new user input.
             }
         }
-
+       
         //returns valid userInput
         return userInput;
     }

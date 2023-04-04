@@ -5,6 +5,7 @@
 package View;
 
 import Controller.MainMenuController;
+import Utils.Constant;
 
 /**
  *
@@ -14,8 +15,11 @@ public enum MainMenu {
     SEARCHBOOK {
         @Override
         public void printRequest() {
+            
             MainMenuController mMC = new MainMenuController();
+            Constant.BookSearch.byAuthor = false;
             mMC.requestBookName();
+            
         } 
     },
     

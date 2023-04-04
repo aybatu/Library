@@ -22,7 +22,12 @@ public class Constant {
      * Book related constants
      */
     public static class Book {
-        //Book list text file name
+        //Book list text file name.
         public final static String bookListFile = "bookList.txt";
+    }
+    
+    public static class BookSearch {
+        //Defines book search by author or book title.
+        public static boolean byAuthor = true;
     }
 }

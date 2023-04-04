@@ -12,6 +12,7 @@ import Model.Entities.Student;
 import Model.StudentBrain.StudentFactory;
 import Utils.Utils;
 import View.MainMenu;
+import View.Menu;
 import java.util.Map;
 
 /**
@@ -57,15 +58,17 @@ public class LibraryCA1 {
 //            
 //        }
         Utils utils = new Utils();
-       
+        
         MainMenu[] mM = MainMenu.values();
         boolean exit = true;
 
         do {
+            Menu.promptMainMenuList();
             int userInput = utils.getUserIntBetween("Please select item you would like to query.", 1, mM.length) - 1;
             
             switch (mM[userInput]) {
                 case SEARCHBOOK:
+                    System.out.println("");
                     mM[userInput].printRequest();
             }
              
