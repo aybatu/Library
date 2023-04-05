@@ -15,8 +15,6 @@ public enum MainMenu {
     SEARCHBOOK {
         @Override
         public void printRequest() {
-            
-            MainMenuController mMC = new MainMenuController();
             Constant.BookSearch.byAuthor = false;
             mMC.requestBookName();
             
@@ -69,7 +67,17 @@ public enum MainMenu {
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
         
+    },
+    
+    EXIT {
+        @Override
+        public void printRequest() {
+            System.out.println("Goodbye. Have a nice day.");
+        }
+        
     };
     
+    MainMenuController mMC = new MainMenuController();
     public abstract void printRequest();
+    
 }

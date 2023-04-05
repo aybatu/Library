@@ -4,6 +4,7 @@
  */
 package library.ca1;
 
+import Controller.StartProgram;
 import Model.BinarySearch;
 import Model.BookBrain.BookFactory;
 import Model.BookBrain.BookRecord;
@@ -57,22 +58,9 @@ public class LibraryCA1 {
 //            System.out.println("Student: " + m.getKey() + " Book: " + b.getTitle());
 //            
 //        }
-        Utils utils = new Utils();
-        
-        MainMenu[] mM = MainMenu.values();
-        boolean exit = true;
-
-        do {
-            Menu.promptMainMenuList();
-            int userInput = utils.getUserIntBetween("Please select item you would like to query.", 1, mM.length) - 1;
-            
-            switch (mM[userInput]) {
-                case SEARCHBOOK:
-                    System.out.println("");
-                    mM[userInput].printRequest();
-            }
-             
-        } while (exit);
+    StartProgram sP = new StartProgram();
+    sP.initiateLibrary();
+    
     }
 
 }

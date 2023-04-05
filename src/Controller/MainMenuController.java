@@ -22,16 +22,16 @@ public class MainMenuController {
         //new Utils object
         Utils iU = new Utils();
         //Book title request
-        String bookName = iU.getString("Please enter book title you would like to search.");
+        String book = iU.getString("Please enter book title you would like to search.");
         //Called method searches for the book name through the book list.
-        searchBookRequest(bookName);
+        searchBookRequest(book);
     }
     
     /**
      * It is used for binary search through the created book array list.
      * @param bookTitle String book title to search
      */
-    private void searchBookRequest(String bookTitle) {
+    private void searchBookRequest(String book) {
         //new binarysearch object.
         BinarySearch bS = new BinarySearch();
         //new book factory
@@ -40,10 +40,10 @@ public class MainMenuController {
         List<Book> bookList = bFC.sortedBookList();
         
         //Requested book index stored in bookIndex
-        int bookIndex = bS.binarySearch(bookList, bookTitle, 0, bookList.size() - 1);
+        int bookIndex = bS.binarySearch(bookList, book, 0, bookList.size() - 1);
         
         if(bookIndex == -1) {
-            System.out.println("Sorry, we could not found "+bookTitle+"in the library.");
+            System.out.println("Sorry, we could not found "+book+"in the library.");
         } else {
             System.out.println("Followed information for the book bellow:");
             System.out.println("Book ID: "+bookList.get(bookIndex).getId());

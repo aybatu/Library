@@ -18,5 +18,13 @@ public class Menu {
         System.out.println("5. Register a book borrow.");
         System.out.println("6. Register a book return.");
         System.out.println("7. Show student-borrow list.");
+        System.out.println("8. Exit.");
+    }
+    public static void promptBookListSubMenu(){
+       System.out.println("");
+        System.out.println("1. List all books ordered by Author Name.");
+        System.out.println("2. List all books ordered by Book Title.");
+        System.out.println("3. Exit.");
+         
     }
 }
