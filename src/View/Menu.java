@@ -40,4 +40,11 @@ public class Menu {
         System.out.println("2. List all students ordered ID.");
         System.out.println("3. Exit.");
     }
+    
+    public static void studentSearchMenuView() {
+        System.out.println("");
+        System.out.println("1. Search by a student name.");
+        System.out.println("2. Serach by a studnet ID.");
+        System.out.println("3. Exit.");
+    }
 }

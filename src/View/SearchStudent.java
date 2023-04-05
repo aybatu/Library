@@ -5,42 +5,37 @@
 package View;
 
 import Controller.MainMenuController;
-import Model.Entities.Student;
-import Model.StudentBrain.StudentFactory;
 import Utils.Constant;
-import java.util.List;
+
 
 /**
  *
  * @author aybatukerkukluoglu
  */
-public enum StudentList {
-    LISTBYNAME {
+public enum SearchStudent {
+    SEARCHNAME {
         @Override
         public void prompt() {
             Constant.StudentSearch.byStudentName = true;
-            List<Student> sL = sF.sortedStudentList();
-            mMC.showStudentInfo(sL);
+            mMC.requestStudentName();
+            
             
         }
     },
-    LISTBYID {
+    SEARCHID {
         @Override
         public void prompt() {
             Constant.StudentSearch.byStudentName = false;
-            List<Student> sL = sF.sortedStudentList();
-            mMC.showStudentInfo(sL);
+            mMC.requestStudentID();
         }
     },
     EXIT {
         @Override
         public void prompt() {
-            System.out.println("Redirecting back to Main Menu.");
+            System.out.println("You are redirecting to Main Menu.");
         }
     };
-
-    private static StudentFactory sF = new StudentFactory();
+    
     private static MainMenuController mMC = new MainMenuController();
     public abstract void prompt();
-
 }

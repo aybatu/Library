@@ -44,7 +44,7 @@ public class StartProgram {
                     mM[userInput].printRequest();
                     break;
                 case SEARCHSTUDENT:
-                    
+                    mM[userInput].printRequest();
                     break;
                 case STUDENTLIST:
                     mM[userInput].printRequest();

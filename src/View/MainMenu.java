@@ -35,7 +35,7 @@ public enum MainMenu {
         public void printRequest() {
             //ListBookSubMenu enum items stored in lBSM
             ListBookSubMenu[] lBSM = ListBookSubMenu.values();
-            
+
             //exitSub1 for do-while loop
             boolean exitSub1 = true;
             //a simple do-while loop
@@ -73,7 +73,30 @@ public enum MainMenu {
     SEARCHSTUDENT {
         @Override
         public void printRequest() {
-            
+            SearchStudent[] sS = SearchStudent.values();
+            boolean exit = true;
+           
+            do {
+                //Prompts Sub Menu list.
+                Menu.studentSearchMenuView();
+                //Asks user input for the sub menu items.
+                int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sS.length) - 1;
+
+                switch (sS[subMenuIndex]) {
+                    case SEARCHNAME -> {
+                        sS[subMenuIndex].prompt();
+                    }
+                    case SEARCHID -> {
+                        sS[subMenuIndex].prompt();
+                    }
+                    case EXIT -> {
+                        exit = false;
+                        sS[subMenuIndex].prompt();
+                    }
+                    default ->
+                        System.out.println("Please restart you program. If you see this message again contact the developer.");
+                }
+            } while (exit);
         }
     },
     /**
@@ -82,30 +105,30 @@ public enum MainMenu {
     STUDENTLIST {
         @Override
         public void printRequest() {
-            StudentList[] sS = StudentList.values();
+            StudentList[] sL = StudentList.values();
             boolean exit = true;
-            
-            do{
-                  //Prompts Sub Menu list.
+
+            do {
+                //Prompts Sub Menu list.
                 Menu.studentListSubMenuView();
                 //Asks user input for the sub menu items.
-                int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sS.length) - 1;
-                switch(sS[subMenuIndex]) {
-                    case SEARCHNAME:
-                        sS[subMenuIndex].prompt();
-                        break;
-                    case SEARCHID:
-                        sS[subMenuIndex].prompt();
-                        break;
-                    case EXIT:
+                int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sL.length) - 1;
+                switch (sL[subMenuIndex]) {
+                    case LISTBYNAME ->
+                        sL[subMenuIndex].prompt();
+
+                    case LISTBYID ->
+                        sL[subMenuIndex].prompt();
+
+                    case EXIT -> {
                         exit = false;
-                        sS[subMenuIndex].prompt();
-                        break;
-                    default:
+                        sL[subMenuIndex].prompt();
+                    }
+                    default ->
                         System.out.println("Please restart you program. If you see this message again contact the developer.");
-                    
+
                 }
-            }while(exit);
+            } while (exit);
         }
 
     },
@@ -150,7 +173,7 @@ public enum MainMenu {
         }
 
     };
-    
+
     //New mainMenuController object.
     private static MainMenuController mMC = new MainMenuController();
     //New Utils object.
