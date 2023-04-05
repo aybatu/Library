@@ -15,45 +15,39 @@ import View.Menu;
  */
 public class StartProgram {
 
+    /**
+     * Initiates Library program and provides menu rotation.
+     */
     public void initiateLibrary() {
+        //New Utils object.
         Utils utils = new Utils();
 
+        //MainMenu enum values stored in mM.
         MainMenu[] mM = MainMenu.values();
-        ListBookSubMenu[] lBSM = ListBookSubMenu.values();
+        //exit set true for do-while loop.
         boolean exit = true;
 
+        //A simple do-while loop.
         do {
-            Menu.promptMainMenuList();
+            //Prompts main menu view.
+            Menu.mainMenuListView();
+            //Asks user input to choose for any menu item.
             int userInput = utils.getUserIntBetween("Please select item you would like to query.", 1, mM.length) - 1;
-
+            //Main menu switch-case statement.
             switch (mM[userInput]) {
+                //search for a specific book by its name.
                 case SEARCHBOOK:
                     mM[userInput].printRequest();
                     break;
+                //Prompts book list either ordered by author or title
                 case LISTBOOKS:
-                    boolean exitSub1 = true;
-                    do {
-                        Menu.promptBookListSubMenu();
-                        int firstSubMenu = utils.getUserIntBetween("Please select one of the options below.", 1, lBSM.length) - 1;
-                        
-                        switch (lBSM[firstSubMenu]) {
-                            case ORDERBYAUTHOR:
-                                lBSM[firstSubMenu].prompt();
-                                break;
-                            case ORDERBYTITLE:
-                                lBSM[firstSubMenu].prompt();
-                                break;
-                            case EXIT:
-                                exitSub1 = false;
-                                lBSM[firstSubMenu].prompt();
-                                break;
-                            default:
-                                System.out.println("Please restart you program. If you see this message again contact the developer.");
-                        }
-                    } while (exitSub1);
+                    mM[userInput].printRequest();
+                    break;
                 case SEARCHSTUDENT:
+                    
                     break;
                 case STUDENTLIST:
+                    mM[userInput].printRequest();
                     break;
                 case BORROWBOOK:
                     break;

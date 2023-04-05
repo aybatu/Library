@@ -9,7 +9,10 @@ package View;
  * @author aybatukerkukluoglu
  */
 public class Menu {
-    public static void promptMainMenuList() {
+    /**
+     * Main Menu View.
+     */
+    public static void mainMenuListView() {
         System.out.println("");
         System.out.println("1. Search for a book.");
         System.out.println("2. Fetch book list in the library ordered by 'Author Name' or 'Book Title'.");
@@ -20,11 +23,21 @@ public class Menu {
         System.out.println("7. Show student-borrow list.");
         System.out.println("8. Exit.");
     }
-    public static void promptBookListSubMenu(){
+    /**
+     * Book List option sub menu view.
+     */
+    public static void bookListSubMenuView(){
        System.out.println("");
         System.out.println("1. List all books ordered by Author Name.");
         System.out.println("2. List all books ordered by Book Title.");
         System.out.println("3. Exit.");
          
+    }
+    
+    public static void studentListSubMenuView() {
+        System.out.println("");
+        System.out.println("1. List all students ordered by name.");
+        System.out.println("2. List all students ordered ID.");
+        System.out.println("3. Exit.");
     }
 }

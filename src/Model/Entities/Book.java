@@ -50,13 +50,14 @@ public class Book implements Comparable<Book>{
     }
 
     /**
-     * Implemented by 'Comparable' interface
+     * Implemented by 'Comparable' interface, makes object comparable for sort in a order.
      * @param o A book object for alphabetical comparison.
      * @return an integer value as a comparison result.
      */
     @Override
     public int compareTo(Book o) {
-        return toString().compareTo(o.toString().toLowerCase());
+        //Compares object's toString method return with provided another book object toString method return.
+        return toString().compareTo(o.toString());
     }
 
     /**
@@ -65,9 +66,12 @@ public class Book implements Comparable<Book>{
      */
     @Override
     public String toString() {
+        //a simple if statement.
         if(Constant.BookSearch.byAuthor) {
+            //if byAuthor set true, return author full name.
             return authorFN.toLowerCase();
         } else {
+            //if byAuthor variable set false returns title.
             return title.toLowerCase();
         }
     }

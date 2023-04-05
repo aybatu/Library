@@ -13,8 +13,14 @@ import java.util.List;
  */
 public class SubMenuController {
 
+    /**
+     * Prompt provided book list information
+     * @param bookList a book object array list
+     */
     public void showBookListInfo(List<Book> bookList) {
+        //simple for loop for a Book array list.
         for(Book b: bookList) {
+            //prompts each book information in the list.
             System.out.println("Followed information for the book bellow:");
             System.out.println("Book ID: "+b.getId());
             System.out.println("Book Author: "+b.getAuthor());
