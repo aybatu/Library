@@ -4,12 +4,12 @@
  */
 package View;
 
-import Controller.MainMenuController;
+import Controller.Menu.SearchBookMenuController;
 import Utils.Constant;
 import Utils.Utils;
 
 /**
- * Main Menu Options.
+ * Main MenuView Options.
  *
  * @author aybatukerkukluoglu
  */
@@ -23,7 +23,7 @@ public enum MainMenu {
             //byAuthor static variable must be set false since search will be for the title.
             Constant.BookSearch.byAuthor = false;
             //Request a book name to search.
-            mMC.requestBookTitle();
+            mMC.requestBookTitle("Please enter book title you would like to search.");
 
         }
     },
@@ -40,8 +40,8 @@ public enum MainMenu {
             boolean exitSub1 = true;
             //a simple do-while loop
             do {
-                //Prompts Sub Menu list.
-                Menu.bookListSubMenuView();
+                //Prompts Sub MenuView list.
+                MenuView.bookListSubMenuView();
                 //Asks user input for the sub menu items.
                 int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, lBSM.length) - 1;
                 //simple switch to rule statement for sub menu.
@@ -73,12 +73,12 @@ public enum MainMenu {
     SEARCHSTUDENT {
         @Override
         public void printRequest() {
-            SearchStudent[] sS = SearchStudent.values();
+            SearchStudentSubMenu[] sS = SearchStudentSubMenu.values();
             boolean exit = true;
-           
+
             do {
-                //Prompts Sub Menu list.
-                Menu.studentSearchMenuView();
+                //Prompts Sub MenuView list.
+                MenuView.studentSearchMenuView();
                 //Asks user input for the sub menu items.
                 int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sS.length) - 1;
 
@@ -105,12 +105,12 @@ public enum MainMenu {
     STUDENTLIST {
         @Override
         public void printRequest() {
-            StudentList[] sL = StudentList.values();
+            StudentListSubMenu[] sL = StudentListSubMenu.values();
             boolean exit = true;
 
             do {
-                //Prompts Sub Menu list.
-                Menu.studentListSubMenuView();
+                //Prompts Sub MenuView list.
+                MenuView.studentListSubMenuView();
                 //Asks user input for the sub menu items.
                 int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sL.length) - 1;
                 switch (sL[subMenuIndex]) {
@@ -138,9 +138,10 @@ public enum MainMenu {
     BORROWBOOK {
         @Override
         public void printRequest() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            Constant.StudentSearch.byStudentName = false;
+            Constant.BookSearch.byAuthor = false;
+           
         }
-
     },
     /**
      * Provides an option to add a book back to library that returned by a
@@ -175,7 +176,7 @@ public enum MainMenu {
     };
 
     //New mainMenuController object.
-    private static MainMenuController mMC = new MainMenuController();
+    private static SearchBookMenuController mMC = new SearchBookMenuController();
     //New Utils object.
     private static Utils utils = new Utils();
 

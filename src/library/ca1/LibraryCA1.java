@@ -5,16 +5,18 @@
 package library.ca1;
 
 import Controller.StartProgram;
-import Model.BinarySearch;
-import Model.BookBrain.BookFactory;
-import Model.BookBrain.BookRecord;
+import Controller.SearchAlgorithms;
+import Controller.Book.BookFactory;
+import Model.Entities.BookBorrowRecord;
 import Model.Entities.Book;
 import Model.Entities.Student;
-import Model.StudentBrain.StudentFactory;
+import Controller.Student.StudentFactory;
 import Utils.Utils;
 import View.MainMenu;
-import View.Menu;
+import View.MenuView;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -26,41 +28,23 @@ public class LibraryCA1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-//        BookFactory bFC = new BookFactory();
-//        int i = 0;
-//        for (Book t : bFC.sortedBookList()) {
-//            i++;
-//            System.out.println(i + " " + t.toString());
-//        }
-//
-//        BinarySearch binarySearch = new BinarySearch();
-//
-//        System.out.println(binarySearch.binarySearch(bFC.sortedBookList(), "Zorana Klais", 0, bFC.sortedBookList().size() - 1));
-//
-//        StudentFactory sF = new StudentFactory();
-//        int j = 0;
-//        for (Student s : sF.sortedStudentList()) {
-//            j++;
-//            System.out.println(j + " " + s.getFirstName() + s.getLastName() + s.getAddress());
-//        }
-//
-//        System.out.println(binarySearch.binarySearch(sF.sortedStudentList(), "Martina Alvarez", 0, sF.sortedStudentList().size() - 1));
-//        
-//        Book book = bFC.sortedBookList().get(1);
-//        Student student = sF.sortedStudentList().get(1);
-//        
-//        BookRecord newBR = new BookRecord();
-//        newBR.borrowBook(student, book);
-//        
-//        for(Map.Entry m:BookRecord.getBorrowList().entrySet()) {
-//            Book b = (Book)m.getValue();
-//            System.out.println("Student: " + m.getKey() + " Book: " + b.getTitle());
-//            
-//        }
-    StartProgram sP = new StartProgram();
-    sP.initiateLibrary();
-    
+
+        StartProgram sP = new StartProgram();
+        sP.initiateLibrary();
+//Student newS = new Student("1", "1", "2", "a");
+//Student newS2 = new Student("2", "3", "5", "a");
+//Book newB = new Book("e578b06e-66e9-413a-b0e2-d387d00c907d", "2", "a");
+//Book newB2 = new Book("e578b06e-66e9-413a-b0e2-d387d00c907d", "2", "a");
+//        BookBorrowRecord test = new BookBorrowRecord(newS, newB);
+//        BookBorrowRecord test2 = new BookBorrowRecord(newS, newB2);
+//        HashSet<BookBorrowRecord> set = new HashSet<>();
+//        set.add(test);
+//        set.add(test2);
+//        System.out.println(set.size());
+        
+        
+        
+
     }
 
 }

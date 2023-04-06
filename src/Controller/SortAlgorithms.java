@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model;
+package Controller;
 
-import Model.Sorting;
+import Controller.Sorting;
 
 /**
  * Implements Bubble Sorting for comparable objects.
@@ -12,12 +12,12 @@ import Model.Sorting;
  * @author aybatukerkukluoglu
  * @param <T> generic type for all object types
  */
-public class BubbleSort<T extends Comparable<T>> implements Sorting<T> {
+public class SortAlgorithms<T extends Comparable<T>> implements Sorting<T> {
 
     /**
      * Just a simple constructor
      */
-    public BubbleSort() {
+    public SortAlgorithms() {
 
     }
 

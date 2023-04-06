@@ -5,9 +5,8 @@
 package Controller;
 
 import Utils.Utils;
-import View.ListBookSubMenu;
 import View.MainMenu;
-import View.Menu;
+import View.MenuView;
 
 /**
  *
@@ -30,40 +29,30 @@ public class StartProgram {
         //A simple do-while loop.
         do {
             //Prompts main menu view.
-            Menu.mainMenuListView();
+            MenuView.mainMenuListView();
             //Asks user input to choose for any menu item.
             int userInput = utils.getUserIntBetween("Please select item you would like to query.", 1, mM.length) - 1;
             //Main menu switch-case statement.
             switch (mM[userInput]) {
-                //search for a specific book by its name.
-                case SEARCHBOOK:
-                    mM[userInput].printRequest();
-                    break;
-                //Prompts book list either ordered by author or title
-                case LISTBOOKS:
-                    mM[userInput].printRequest();
-                    break;
-                case SEARCHSTUDENT:
-                    mM[userInput].printRequest();
-                    break;
-                case STUDENTLIST:
-                    mM[userInput].printRequest();
-                    break;
-                case BORROWBOOK:
-                    break;
-                case RETURNBOOK:
-                    break;
-                case STUDENTBORROWLIST:
-                    break;
-                case EXIT:
+                case SEARCHBOOK -> mM[userInput].printRequest();
+                case LISTBOOKS -> mM[userInput].printRequest();
+                case SEARCHSTUDENT -> mM[userInput].printRequest();
+                case STUDENTLIST -> mM[userInput].printRequest();
+                case BORROWBOOK -> mM[userInput].printRequest();
+                case RETURNBOOK -> {
+                }
+                case STUDENTBORROWLIST -> {
+                }
+                case EXIT -> {
                     mM[userInput].printRequest();
                     exit = false;
-                    break;
-                default:
-                    System.out.println("Please restart you program. If you see this message again contact the developer.");
+                }
+                default -> System.out.println("Please restart you program. If you see this message again contact the developer.");
 
             }
-
+            //search for a specific book by its name.
+            //Prompts book list either ordered by author or title
+            
         } while (exit);
     }
 }

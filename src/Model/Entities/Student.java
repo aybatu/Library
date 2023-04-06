@@ -13,7 +13,7 @@ import Utils.Constant;
  */
 public class Student implements Comparable<Student> {
     //PROPERTIES OF A STUDENT
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String address;
@@ -25,7 +25,7 @@ public class Student implements Comparable<Student> {
      * @param lastName a string for a student last name
      * @param address a string for a student address
      */
-    public Student(int id, String firstName, String lastName, String address) {
+    public Student(String id, String firstName, String lastName, String address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class Student implements Comparable<Student> {
      * Provides the student ID
      * @return an integer as student id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
     /**
@@ -81,7 +81,7 @@ public class Student implements Comparable<Student> {
             return this.firstName.toLowerCase() + " " + this.lastName.toLowerCase();
         }else {
             //byStudentName set false return student id as a String.
-            return Integer.toString(id);
+            return id;
         }
     }
 

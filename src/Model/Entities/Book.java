@@ -10,14 +10,16 @@ import Utils.Constant;
  *
  * @author aybatukerkukluoglu
  */
-public class Book implements Comparable<Book>{
+public class Book implements Comparable<Book> {
+
     //PROPERTIES
     private String id;
     private String title;
     private String authorFN;
-    
+
     /**
      * Book constructor
+     *
      * @param id a string unique ID for a book
      * @param authorFN author full name of a book
      * @param title book name
@@ -27,22 +29,28 @@ public class Book implements Comparable<Book>{
         this.authorFN = authorFN;
         this.title = title;
     }
+
     /**
      * A simple getter for the book ID
+     *
      * @return a string unique ID for the book
      */
     public String getId() {
         return id;
     }
+
     /**
      * A simple getter the book title
+     *
      * @return a string for the book title
      */
     public String getTitle() {
         return title;
     }
+
     /**
      * A simple getter for the book author full name
+     *
      * @return a string for the author full name.
      */
     public String getAuthor() {
@@ -50,7 +58,9 @@ public class Book implements Comparable<Book>{
     }
 
     /**
-     * Implemented by 'Comparable' interface, makes object comparable for sort in a order.
+     * Implemented by 'Comparable' interface, makes object comparable for sort
+     * in a order.
+     *
      * @param o A book object for alphabetical comparison.
      * @return an integer value as a comparison result.
      */
@@ -61,13 +71,15 @@ public class Book implements Comparable<Book>{
     }
 
     /**
-     * Overrides 'toString' when object called by itself provides author full name of the book
+     * Overrides 'toString' when object called by itself provides author full
+     * name of the book
+     *
      * @return a string for the book's author full name.
      */
     @Override
     public String toString() {
         //a simple if statement.
-        if(Constant.BookSearch.byAuthor) {
+        if (Constant.BookSearch.byAuthor) {
             //if byAuthor set true, return author full name.
             return authorFN.toLowerCase();
         } else {
@@ -76,5 +88,4 @@ public class Book implements Comparable<Book>{
         }
     }
 
-    
 }

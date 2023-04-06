@@ -4,9 +4,8 @@
  */
 package View;
 
-import Controller.MainMenuController;
 import Model.Entities.Student;
-import Model.StudentBrain.StudentFactory;
+import Controller.Student.StudentFactory;
 import Utils.Constant;
 import java.util.List;
 
@@ -14,13 +13,13 @@ import java.util.List;
  *
  * @author aybatukerkukluoglu
  */
-public enum StudentList {
+public enum StudentListSubMenu {
     LISTBYNAME {
         @Override
         public void prompt() {
             Constant.StudentSearch.byStudentName = true;
             List<Student> sL = sF.sortedStudentList();
-            mMC.showStudentInfo(sL);
+            sSIV.showStudentInfo(sL);
             
         }
     },
@@ -29,7 +28,7 @@ public enum StudentList {
         public void prompt() {
             Constant.StudentSearch.byStudentName = false;
             List<Student> sL = sF.sortedStudentList();
-            mMC.showStudentInfo(sL);
+            sSIV.showStudentInfo(sL);
         }
     },
     EXIT {
@@ -40,7 +39,7 @@ public enum StudentList {
     };
 
     private static StudentFactory sF = new StudentFactory();
-    private static MainMenuController mMC = new MainMenuController();
+    private static ShowStudentInfoView sSIV = new ShowStudentInfoView();
     public abstract void prompt();
 
 }

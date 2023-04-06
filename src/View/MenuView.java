@@ -8,9 +8,9 @@ package View;
  *
  * @author aybatukerkukluoglu
  */
-public class Menu {
+public class MenuView {
     /**
-     * Main Menu View.
+     * Main MenuView View.
      */
     public static void mainMenuListView() {
         System.out.println("");

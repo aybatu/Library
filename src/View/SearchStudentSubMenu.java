@@ -4,7 +4,8 @@
  */
 package View;
 
-import Controller.MainMenuController;
+import Controller.Menu.SearchBookMenuController;
+import Controller.Menu.SearchStudentSubMenuController;
 import Utils.Constant;
 
 
@@ -12,12 +13,12 @@ import Utils.Constant;
  *
  * @author aybatukerkukluoglu
  */
-public enum SearchStudent {
+public enum SearchStudentSubMenu {
     SEARCHNAME {
         @Override
         public void prompt() {
             Constant.StudentSearch.byStudentName = true;
-            mMC.requestStudentName();
+            sSSMC.requestStudentName("Please enter student full name you would like to search.");
             
             
         }
@@ -26,7 +27,7 @@ public enum SearchStudent {
         @Override
         public void prompt() {
             Constant.StudentSearch.byStudentName = false;
-            mMC.requestStudentID();
+            sSSMC.requestStudentID("Please enter student ID you would like to search.");
         }
     },
     EXIT {
@@ -36,6 +37,6 @@ public enum SearchStudent {
         }
     };
     
-    private static MainMenuController mMC = new MainMenuController();
+    private static SearchStudentSubMenuController sSSMC = new SearchStudentSubMenuController();
     public abstract void prompt();
 }

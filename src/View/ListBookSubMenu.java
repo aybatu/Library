@@ -4,8 +4,8 @@
  */
 package View;
 
-import Controller.SubMenuController;
-import Model.BookBrain.BookFactory;
+import Controller.Menu.ListBookSubMenuController;
+import Controller.Book.BookFactory;
 import Model.Entities.Book;
 import Utils.Constant;
 import java.util.List;
@@ -55,8 +55,8 @@ public enum ListBookSubMenu {
         }
     };
     
-    //new SubMenuController Object.
-    private static SubMenuController sMC = new SubMenuController();
+    //new ListBookSubMenuController Object.
+    private static ListBookSubMenuController sMC = new ListBookSubMenuController();
     //New BookFactory object
     private static BookFactory bF = new BookFactory();
     //Applied for all enum items.

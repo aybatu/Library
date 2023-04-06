@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model.StudentBrain;
+package Controller.Student;
 
-import Model.BubbleSort;
-import Model.Sorting;
+import Controller.SortAlgorithms;
+import Controller.SortAlgorithms;
+import Controller.Sorting;
+import Controller.Sorting;
 import Model.Entities.Student;
 import Utils.Constant;
 import Utils.FileReaderScanner;
@@ -43,8 +45,8 @@ public class StudentFactory {
         List<Student> studentList = new ArrayList<>();
         //a new student studentArr assigned to list of books created by a txt file.
         Student[] studentArr = retrieveStudentList(Constant.Student.studentListFile);
-        //A new BubbleSort object.
-        Sorting bSort = new BubbleSort();
+        //A new SortAlgorithms object.
+        Sorting bSort = new SortAlgorithms();
 
         //studentArr sorted bu bubbleSorting method.
         bSort.bubbleSorting(studentArr);
@@ -78,7 +80,7 @@ public class StudentFactory {
 
             //studentID assigned to Student ID retrieved from the txt file.
             String studentID = studentInfo[studentIDIndex];
-            int sID = Integer.parseInt(studentID);
+            String sID = studentID;
             //Student first name stored to sFN retrieved from the txt file.
             String sFN = studentInfo[sFIndex];
              //Student last name stored to sLN retrieved from the txt file.

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controller;
+package Controller.Menu;
 
 import Model.Entities.Book;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author aybatukerkukluoglu
  */
-public class SubMenuController {
+public class ListBookSubMenuController {
 
     /**
      * Prompt provided book list information

@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Model.BookBrain;
+package Controller.Book;
 
-import Model.BubbleSort;
-import Model.Sorting;
+import Controller.SortAlgorithms;
+import Controller.SortAlgorithms;
+import Controller.Sorting;
+import Controller.Sorting;
 import Model.Entities.Book;
 import Utils.Constant;
 import Utils.FileReaderScanner;
@@ -43,8 +45,8 @@ public class BookFactory {
         List<Book> bookList = new ArrayList<>();
         //a new book bookArr assigned to list of books created by a txt file.
         Book[] bookArr = retrieveBookList(Constant.Book.bookListFile);
-        //A new BubbleSort object.
-        Sorting bSort = new BubbleSort();
+        //A new SortAlgorithms object.
+        Sorting bSort = new SortAlgorithms();
         
         //bookArr sorted bu bubbleSorting method.
         bSort.bubbleSorting(bookArr);
