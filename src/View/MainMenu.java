@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.Menu.BorrowBookMenuController;
 import Controller.Menu.SearchBookMenuController;
 import Utils.Constant;
 import Utils.Utils;
@@ -20,6 +21,8 @@ public enum MainMenu {
     SEARCHBOOK {
         @Override
         public void printRequest() {
+            //New mainMenuController object.
+            SearchBookMenuController mMC = new SearchBookMenuController();
             //byAuthor static variable must be set false since search will be for the title.
             Constant.BookSearch.byAuthor = false;
             //Request a book name to search.
@@ -73,26 +76,33 @@ public enum MainMenu {
     SEARCHSTUDENT {
         @Override
         public void printRequest() {
+            //SearchStudentSubMenu enum values stored in an array.
             SearchStudentSubMenu[] sS = SearchStudentSubMenu.values();
+            //do-while loop condition variable 'exit'.
             boolean exit = true;
 
+            //a simple do-while loop.
             do {
                 //Prompts Sub MenuView list.
                 MenuView.studentSearchMenuView();
                 //Asks user input for the sub menu items.
                 int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sS.length) - 1;
-
+                //a simple switch-case statement with 'sS' enum.
                 switch (sS[subMenuIndex]) {
+                    //search for a name
                     case SEARCHNAME -> {
                         sS[subMenuIndex].prompt();
                     }
+                    //search for an ID
                     case SEARCHID -> {
                         sS[subMenuIndex].prompt();
                     }
+                    //executes sub menu.
                     case EXIT -> {
                         exit = false;
                         sS[subMenuIndex].prompt();
                     }
+                    //informs user there might be a bug.
                     default ->
                         System.out.println("Please restart you program. If you see this message again contact the developer.");
                 }
@@ -105,25 +115,31 @@ public enum MainMenu {
     STUDENTLIST {
         @Override
         public void printRequest() {
+            //StudentListSubMenu enum values stored in an array 'sL'
             StudentListSubMenu[] sL = StudentListSubMenu.values();
+            //do-while loop conditioner.
             boolean exit = true;
 
+            //a simple do-while loop
             do {
                 //Prompts Sub MenuView list.
                 MenuView.studentListSubMenuView();
                 //Asks user input for the sub menu items.
                 int subMenuIndex = utils.getUserIntBetween("Please select one of the options below.", 1, sL.length) - 1;
+                //a simple switch-case statement with array 'sL'
                 switch (sL[subMenuIndex]) {
+                    //Order students by name.
                     case LISTBYNAME ->
                         sL[subMenuIndex].prompt();
-
+                    //Order student by their IF
                     case LISTBYID ->
                         sL[subMenuIndex].prompt();
-
+                    //executes sub menu.
                     case EXIT -> {
                         exit = false;
                         sL[subMenuIndex].prompt();
                     }
+                    //informs user there might be a bug.
                     default ->
                         System.out.println("Please restart you program. If you see this message again contact the developer.");
 
@@ -138,9 +154,79 @@ public enum MainMenu {
     BORROWBOOK {
         @Override
         public void printRequest() {
+            //Student Search result will be done with ID not by a name.
             Constant.StudentSearch.byStudentName = false;
+            //Book search will be done by a book title not author name.
             Constant.BookSearch.byAuthor = false;
-           
+
+            BorrowBookMenuController bBMC = new BorrowBookMenuController();
+            BookBorrowSubMenu[] subMenu = BookBorrowSubMenu.values();
+            boolean askForBookTitle = true;
+
+            if (!bBMC.requestStudentID("Please enter 'Student ID'\n")) {
+                boolean stopMenu = true;
+                do {
+                    BorrowBookSubMenuView.borrowBookSubMenuView();
+                    int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+
+                    switch (subMenu[userInput]) {
+                        case YES:
+                            stopMenu = !bBMC.requestStudentID("Please enter 'Student ID'\n");
+                            askForBookTitle = true;
+                            break;
+                        case NO:
+                            stopMenu = false;
+                            askForBookTitle = false;
+                            break;
+                        default:
+                            System.out.println("Please restart you program. If you see this message again contact the developer.");
+
+                    }
+                } while (stopMenu);
+            }
+
+            boolean askBookToBorrow = false;
+            if (askForBookTitle) {
+                if (!bBMC.requestBookTitle("Please enter 'Book Title'")) {
+                    boolean stopMenu = true;
+                    do {
+                        BorrowBookSubMenuView.borrowBookSubMenuView();
+                        int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+
+                        switch (subMenu[userInput]) {
+                            case YES:
+                                stopMenu = !bBMC.requestBookTitle("Please enter 'Book Title\n'");
+                                break;
+                            case NO:
+                                System.out.println("You are redirecting to main menu...\n");
+                                stopMenu = false;
+                                break;
+                            default:
+                                System.out.println("Please restart you program. If you see this message again contact the developer.");
+
+                        }
+                    } while (stopMenu);
+                } else {
+                    askBookToBorrow = true;
+                }
+            }
+
+            if (askBookToBorrow) {
+                MenuView.borrowBookApprov();
+                int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+                switch (subMenu[userInput]) {
+                    case YES:
+                        bBMC.borrowBook();
+                        break;
+                    case NO:
+                        System.out.println("You are redirecting to main menu...\n");
+                        break;
+                    default:
+                        System.out.println("Please restart you program. If you see this message again contact the developer.");
+
+                }
+            }
+
         }
     },
     /**
@@ -165,7 +251,7 @@ public enum MainMenu {
 
     },
     /**
-     * Finishes program.
+     * End of the program.
      */
     EXIT {
         @Override
@@ -175,8 +261,6 @@ public enum MainMenu {
 
     };
 
-    //New mainMenuController object.
-    private static SearchBookMenuController mMC = new SearchBookMenuController();
     //New Utils object.
     private static Utils utils = new Utils();
 

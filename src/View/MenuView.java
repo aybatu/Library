@@ -47,4 +47,10 @@ public class MenuView {
         System.out.println("2. Serach by a studnet ID.");
         System.out.println("3. Exit.");
     }
+    
+    public static void borrowBookApprov() {
+        System.out.println("Would you like to borrow the book specified student?");
+        System.out.println("1. Yes.");
+        System.out.println("2. No.");
+    }
 }

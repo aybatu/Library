@@ -42,4 +42,5 @@ public class WriterBuffer {
             System.out.println("There is a problem to write file.");
         }
     }
+   
 }
