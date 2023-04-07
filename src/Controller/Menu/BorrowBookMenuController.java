@@ -6,6 +6,7 @@ package Controller.Menu;
 
 import Controller.Book.BookFactory;
 import Controller.Book.BookTitleReader;
+import Controller.Queue.QueueController;
 import Controller.SearchAlgorithms;
 import Controller.Student.StudentFactory;
 import Model.Entities.Book;
@@ -26,10 +27,10 @@ public class BorrowBookMenuController {
     private final SearchAlgorithms bS;
     private final BookFactory bF = new BookFactory();
     private final StudentFactory sF = new StudentFactory();
+    private final QueueController qC = new QueueController();
     private final BookTitleReader bTR;
     private final Utils iU = new Utils();
-    private boolean isStudentValid;
-    private boolean isBookValid;
+    
     private Student student;
     private Book book;
 
@@ -79,17 +80,25 @@ public class BorrowBookMenuController {
             System.out.println("Sorry, student registration cannot found in the system.\n");
 
             //isStudentValid set false
-            isStudentValid = false;
+        
             return false;
         } else {
             student = sF.sortedStudentList().get(studentIndex);
             //Student is valid informs user
             System.out.println("Student found in the system successfully.\n");
             //isStuendtValid set true
-            isStudentValid = true;
+           
             return true;
         }
 
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Book getBook() {
+        return book;
     }
 
     /**
@@ -104,22 +113,37 @@ public class BorrowBookMenuController {
             //inform user for the status of book
             System.out.println("The library does not have that book registered in the system.\n");
             //isBookValid set false
-            isBookValid = false;
+         
             return false;
         } else if (bookTitleSet.contains(bF.sortedBookList().get(bookIndex).getTitle())) {
-            System.out.println("Book is not in the library recently. Borrowed by another student.\n");
-            isBookValid = false;
-            return false;
+            book = bF.sortedBookList().get(bookIndex);
+            System.out.println("Book is not in the library recently. Borrowed by another student.");
+            addQueue(student.getId(), book.getTitle());
+            return true;
         } else {
             book = bF.sortedBookList().get(bookIndex);
             //Inform users book is valid
             System.out.println("The book found in the system successfully.\n");
-            //isBookValid set true
-            isBookValid = true;
+         
             return true;
         }
 
     }
+    
+    public void addQueue(String studentID, String bookName){
+        QueueController restartQ = new QueueController();
+        List<String> data = new ArrayList<>();
+        
+        data.add(studentID);
+        data.add(bookName);
+        
+        qC.writeToFile("queueList.txt", data);
+        restartQ.prepareQueue();
+        System.out.println("Student successfully added into a waiting list. You will be informed when book returned back in library.\n");
+        
+    }
+        
+    
 
     public void borrowBook() {
         

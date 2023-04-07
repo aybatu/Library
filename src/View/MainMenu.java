@@ -195,7 +195,8 @@ public enum MainMenu {
 
                         switch (subMenu[userInput]) {
                             case YES:
-                                stopMenu = !bBMC.requestBookTitle("Please enter 'Book Title\n'");
+                                stopMenu = !bBMC.requestBookTitle("Please enter 'Book Title'\n");
+                                askBookToBorrow = false;
                                 break;
                             case NO:
                                 System.out.println("You are redirecting to main menu...\n");

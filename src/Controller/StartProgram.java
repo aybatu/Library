@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Controller.Queue.QueueController;
 import Utils.Utils;
 import View.MainMenu;
 import View.MenuView;
@@ -18,6 +19,8 @@ public class StartProgram {
      * Initiates Library program and provides menu rotation.
      */
     public void initiateLibrary() {
+        QueueController startQ = new QueueController();
+        startQ.prepareQueue();
         //New Utils object.
         Utils utils = new Utils();
 

@@ -5,19 +5,6 @@
 package library.ca1;
 
 import Controller.StartProgram;
-import Controller.SearchAlgorithms;
-import Controller.Book.BookFactory;
-import Model.Entities.BookBorrowRecord;
-import Model.Entities.Book;
-import Model.Entities.Student;
-import Controller.Student.StudentFactory;
-import Utils.Utils;
-import View.MainMenu;
-import View.MenuView;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 /**
  *
  * @author aybatukerkukluoglu
@@ -41,8 +28,6 @@ public class LibraryCA1 {
 //        set.add(test);
 //        set.add(test2);
 //        System.out.println(set.size());
-        
-        
         
 
     }
