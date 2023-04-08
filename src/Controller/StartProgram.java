@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Controller.Menu.BorrowBookMenuController;
 import Controller.Queue.QueueController;
 import Utils.Utils;
 import View.MainMenu;
@@ -21,6 +22,8 @@ public class StartProgram {
     public void initiateLibrary() {
         QueueController startQ = new QueueController();
         startQ.prepareQueue();
+        BorrowBookMenuController bBMC = new BorrowBookMenuController();
+        bBMC.updateBorrowList();
         //New Utils object.
         Utils utils = new Utils();
 

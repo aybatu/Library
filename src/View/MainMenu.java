@@ -5,7 +5,10 @@
 package View;
 
 import Controller.Menu.BorrowBookMenuController;
+import Controller.Menu.ReturnBookController;
 import Controller.Menu.SearchBookMenuController;
+import Controller.Menu.SearchStudentSubMenuController;
+import Controller.Queue.QueueController;
 import Utils.Constant;
 import Utils.Utils;
 
@@ -187,7 +190,8 @@ public enum MainMenu {
 
             boolean askBookToBorrow = false;
             if (askForBookTitle) {
-                if (!bBMC.requestBookTitle("Please enter 'Book Title'")) {
+                boolean status = bBMC.requestBookTitle("Please enter 'Book Title'\n");
+                if (!status) {
                     boolean stopMenu = true;
                     do {
                         BorrowBookSubMenuView.borrowBookSubMenuView();
@@ -196,17 +200,20 @@ public enum MainMenu {
                         switch (subMenu[userInput]) {
                             case YES:
                                 stopMenu = !bBMC.requestBookTitle("Please enter 'Book Title'\n");
-                                askBookToBorrow = false;
+                                askBookToBorrow = true;
                                 break;
                             case NO:
                                 System.out.println("You are redirecting to main menu...\n");
                                 stopMenu = false;
+                                askBookToBorrow = false;
                                 break;
                             default:
                                 System.out.println("Please restart you program. If you see this message again contact the developer.");
 
                         }
                     } while (stopMenu);
+                } else if (!bBMC.isBookAvailable() && status) {
+                    askBookToBorrow = false;
                 } else {
                     askBookToBorrow = true;
                 }
@@ -237,7 +244,35 @@ public enum MainMenu {
     RETURNBOOK {
         @Override
         public void printRequest() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            Constant.StudentSearch.byStudentName = false;
+            Constant.BookSearch.byAuthor = false;
+            QueueController qC = new QueueController();
+            ReturnBookController rBC = new ReturnBookController();
+            BorrowBookMenuController bBMC = new BorrowBookMenuController();
+            String studentID = utils.getString("Please enter the StudentID.");
+            String bookTitle = utils.getString("Please enter book title.");
+            boolean bookStatus = rBC.returnBook(studentID, bookTitle);
+            
+            
+            if(bookStatus) {
+                SearchStudentSubMenuController sSMC = new SearchStudentSubMenuController();
+                SearchBookMenuController sBMC = new SearchBookMenuController();
+                sSMC.searchStudentID(studentID);
+                sBMC.searchBookRequest(bookTitle);
+                System.out.println("The information of return successfuly recorded into system. Thank you.\n");
+                if(qC.queueSearch(bookTitle)){
+                    
+                    String studentIDQueue = qC.getStudentID();
+                    
+                    SearchStudentSubMenuController sSSMC = new SearchStudentSubMenuController();
+                    System.out.println("Student on the below information waits for the book please infrom the student. His information recorded into borrow list.");
+                    sSSMC.searchStudentID(studentIDQueue);
+                    
+                    bBMC.borrowBook(studentIDQueue, bookTitle);
+                }
+                
+            }
+            
         }
 
     },

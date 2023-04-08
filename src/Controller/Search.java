@@ -21,4 +21,6 @@ public interface Search<T extends Comparable<T>> {
      * @return 
      */
     public int binarySearch(List<T> list, String target, int start, int end);
+    
+    public int linearSearch(List<T> list, String target);
 }

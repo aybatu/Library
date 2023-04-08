@@ -35,6 +35,12 @@ public class SearchStudentSubMenuController {
         //Called method searches for the book name through the book list.
         searchForAStudent(student);
     }
+    
+    public void searchStudentID(String studentInfo) {
+
+        //Called method searches for the book name through the book list.
+        searchForAStudent(studentInfo);
+    }
 
     public void requestStudentName(String prompt) {
 

@@ -46,4 +46,18 @@ public class SearchAlgorithms implements Search {
         //Target cannot be found returns "-1".
         return -1;
     }
+
+    @Override
+    public int linearSearch(List list, String target) {
+        int index = -1;
+        for(int i=0; i<list.size(); i++) {
+            if(list.get(i).toString().toLowerCase().equals(target)){
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+
+    
 }

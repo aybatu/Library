@@ -14,21 +14,21 @@ import java.util.List;
 public class ShowStudentInfoView {
     public void showStudentInfo(List<Student> studentList) {
         for (Student s : studentList) {
-            System.out.println("");
+           
+            
             System.out.println("Student ID: " + s.getId());
             System.out.println("Student name: " + s.getFirstName() + " " + s.getLastName());
-            System.out.println("Student Address: " + s.getAddress());
+            System.out.println("Student Address: " + s.getAddress() +"\n");
         }
 
     }
     
     public void showStudentInfo(Student student) {
 
-        System.out.println("");
-        System.out.println("Followed information for the book bellow:");
+        System.out.println("Followed information for the student bellow:\n");
         System.out.println("Student ID: " + student.getId());
         System.out.println("Student name: " + student.getFirstName() + " " + student.getLastName());
-        System.out.println("Student Address: " + student.getAddress());
+        System.out.println("Student Address: " + student.getAddress()+"\n");
 
     }
 }

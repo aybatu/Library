@@ -6,6 +6,7 @@ package Controller.Queue;
 
 import Model.Entities.MyOwnQueue;
 import Utils.FileReaderScanner;
+import Utils.Utils;
 import Utils.WriterBuffer;
 import java.util.List;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public class QueueController {
 
     private static MyOwnQueue myQ;
+    private static int bTIndex = 1;
+    private static int sIDIndex = 0;
+    private String studentID;
 
     public void writeToFile(String fileName, List<String> data) {
         WriterBuffer wB = new WriterBuffer();
@@ -37,6 +41,38 @@ public class QueueController {
 
     public static MyOwnQueue getMyQ() {
         return myQ;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+    
+    public boolean queueSearch(String data){
+        Utils u = new Utils();
+        if(!myQ.isEmpty()) {
+            do{
+                String[] id = u.strSplitter(myQ.First(), " ");
+                String bookTitle = "";
+                for(int i = bTIndex; i<id.length; i++) {
+                    if(id.length - 1 == i) {
+                        bookTitle += id[i].trim();
+                    }else {
+                        bookTitle += id[i].trim() + " ";
+                    }
+                }
+                
+            if(bookTitle.equalsIgnoreCase(data)){
+                studentID = id[sIDIndex];
+                u.removeLine("queueList.txt", studentID+ " " + bookTitle);
+                return true;
+            } else {
+                myQ.Dequeue();
+            }
+
+            }while(!myQ.isEmpty());
+        }
+        
+        return false;
     }
 
 }

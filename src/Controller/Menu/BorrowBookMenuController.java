@@ -30,6 +30,7 @@ public class BorrowBookMenuController {
     private final QueueController qC = new QueueController();
     private final BookTitleReader bTR;
     private final Utils iU = new Utils();
+    private boolean isBookAvailable;
     
     private Student student;
     private Book book;
@@ -37,6 +38,10 @@ public class BorrowBookMenuController {
     public BorrowBookMenuController() {
         this.bS = new SearchAlgorithms();
         this.bTR = new BookTitleReader();
+        
+    }
+    
+    public void updateBorrowList(){
         BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet("borrowList.txt");
     }
 
@@ -113,21 +118,26 @@ public class BorrowBookMenuController {
             //inform user for the status of book
             System.out.println("The library does not have that book registered in the system.\n");
             //isBookValid set false
-         
+            isBookAvailable = false;
             return false;
         } else if (bookTitleSet.contains(bF.sortedBookList().get(bookIndex).getTitle())) {
-            book = bF.sortedBookList().get(bookIndex);
+              book = bF.sortedBookList().get(bookIndex);
             System.out.println("Book is not in the library recently. Borrowed by another student.");
             addQueue(student.getId(), book.getTitle());
+            isBookAvailable = false;
             return true;
         } else {
             book = bF.sortedBookList().get(bookIndex);
             //Inform users book is valid
             System.out.println("The book found in the system successfully.\n");
-         
+            isBookAvailable = true;
             return true;
         }
 
+    }
+
+    public boolean isBookAvailable() {
+        return isBookAvailable;
     }
     
     public void addQueue(String studentID, String bookName){
@@ -154,6 +164,23 @@ public class BorrowBookMenuController {
             borrowInfoList.add(book.getTitle());
 
             bW.writeToFile("borrowList.txt", borrowInfoList);
+            updateBorrowList();
+            System.out.println("Student and book information successfully registered in system.\n");
+        } else {
+            System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");
+        }
+
+    }
+      public void borrowBook(String sID, String bTitle) {
+        
+        if (bookTitleSet.add(bTitle)) {
+            WriterBuffer bW = new WriterBuffer();
+            List<String> borrowInfoList = new ArrayList<>();
+            borrowInfoList.add(sID);
+            borrowInfoList.add(bTitle);
+
+            bW.writeToFile("borrowList.txt", borrowInfoList);
+            updateBorrowList();
             System.out.println("Student and book information successfully registered in system.\n");
         } else {
             System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");

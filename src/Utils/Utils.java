@@ -5,6 +5,10 @@
 package Utils;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
@@ -29,8 +33,8 @@ public class Utils {
         return newText;
 
     }
-    
-     /**
+
+    /**
      * Called method asks user for a input and returns it back as a string.
      *
      * @param prompt is a string parameter. Declares what is the requested
@@ -63,7 +67,38 @@ public class Utils {
         //Returns userInput if there is no error. 
         return userInput;
     }
-    
+
+    public boolean removeLine(String fileName, String data) {
+        File inputFile = new File(fileName);
+        File tempFile = new File("temp.txt");
+        boolean status = false;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String lineToRemove = data;
+            String currentLine;
+
+            while ((currentLine = reader.readLine()) != null) {
+                // trim newline when comparing with lineToRemove
+                String trimmedLine = currentLine.trim();
+                if (trimmedLine.toLowerCase().equals(lineToRemove.toLowerCase())) {
+                    status = true;
+                    continue;
+                }
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+
+            writer.close();
+            reader.close();
+        } catch (Exception e) {
+            System.out.println("File could not be found.");
+        }
+        boolean successful = tempFile.renameTo(inputFile);
+        
+        return status;
+    }
+
     /**
      * Prompt user to enter an integer between two numbers - if invalid keep
      * asking
@@ -101,7 +136,7 @@ public class Utils {
                 myKB.next(); //Gets new line to check new user input.
             }
         }
-       
+
         //returns valid userInput
         return userInput;
     }

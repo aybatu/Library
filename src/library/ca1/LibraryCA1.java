@@ -4,7 +4,11 @@
  */
 package library.ca1;
 
+import Controller.SearchAlgorithms;
 import Controller.StartProgram;
+import Utils.Utils;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author aybatukerkukluoglu
@@ -29,7 +33,6 @@ public class LibraryCA1 {
 //        set.add(test2);
 //        System.out.println(set.size());
         
-
     }
 
 }
