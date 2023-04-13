@@ -173,14 +173,12 @@ public enum MainMenu {
                     BorrowBookSubMenuView.borrowBookSubMenuView();
                     int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
                     switch (subMenu[i]) {
-                        case YES:
-                            isStudentID = bBMC.borrowBook();
-                            break;
-                        case NO:
+                        case YES -> isStudentID = bBMC.borrowBook();
+                        case NO -> {
                             askForBook = false;
                             isStudentID = true;
                             System.out.println("You are redirecting to the main menu.");
-                            break;
+                        }
                     }
 
                 } while (!isStudentID);
@@ -194,16 +192,12 @@ public enum MainMenu {
                         BorrowBookSubMenuView.borrowBookSubMenuView();
                         int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
                         switch (subMenu[i]) {
-                            case YES:
-
-                                isBook = bBMC.borrowBook();
-
-                                break;
-                            case NO:
+                            case YES -> isBook = bBMC.borrowBook();
+                            case NO -> {
                                 borrowBook = false;
                                 isBook = true;
                                 System.out.println("You are redirecting to the main menu.");
-                                break;
+                            }
                         }
 
                     } while (!isBook);

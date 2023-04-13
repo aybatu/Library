@@ -46,10 +46,10 @@ public class BookFactory {
         //a new book bookArr assigned to list of books created by a txt file.
         Book[] bookArr = retrieveBookList(Constant.Book.bookListFile);
         //A new SortAlgorithms object.
-        Sorting bSort = new SortAlgorithms();
+        Sorting iSort = new SortAlgorithms();
         
         //bookArr sorted bu bubbleSorting method.
-        bSort.bubbleSorting(bookArr);
+        iSort.insertionSorting(bookArr);
         //All object of bookArr added to bookList array list.
         bookList.addAll(Arrays.asList(bookArr));
         //Returns the new array list.

@@ -42,7 +42,7 @@ public class BorrowBookMenuController {
 
     public void updateBorrowList() {
         BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet("borrowList.txt");
-        System.out.println(bookTitleSet);
+     
     }
 
     public boolean borrowBook() {
@@ -56,7 +56,7 @@ public class BorrowBookMenuController {
                 WriterBuffer bW = new WriterBuffer();
                 List<String> borrowInfoList = new ArrayList<>();
                 borrowInfoList.add(student.getId());
-                borrowInfoList.add(book.getTitle());
+                borrowInfoList.add(book.getTitle().toLowerCase());
 
                 bW.writeToFile("borrowList.txt", borrowInfoList);
                 updateBorrowList();
@@ -146,14 +146,14 @@ public class BorrowBookMenuController {
     private boolean checkForBook(String bookTitle) {
         int bookIndex = searchForBook(bookTitle);
        
-        
+        updateBorrowList();
         //Does binary search for the book title.
         if (bookIndex == -1) {//if binarySearch return is -1 book is not valid
             //inform user for the status of book
             System.out.println("The library does not have that book registered in the system.\n");
 
             return false;
-        } else if (bookTitleSet.contains(bF.sortedBookList().get(bookIndex).getTitle())) {
+        } else if (bookTitleSet.contains(bF.sortedBookList().get(bookIndex).getTitle().toLowerCase())) {
             book = bF.sortedBookList().get(bookIndex);
             System.out.println("Book is not in the library recently. Borrowed by another student.");
 

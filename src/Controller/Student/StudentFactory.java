@@ -46,10 +46,10 @@ public class StudentFactory {
         //a new student studentArr assigned to list of books created by a txt file.
         Student[] studentArr = retrieveStudentList(Constant.Student.studentListFile);
         //A new SortAlgorithms object.
-        Sorting bSort = new SortAlgorithms();
+        Sorting iSort = new SortAlgorithms();
 
         //studentArr sorted bu bubbleSorting method.
-        bSort.bubbleSorting(studentArr);
+        iSort.insertionSorting(studentArr);
         //All object of studentArr added to studentList array list.
         studentList.addAll(Arrays.asList(studentArr));
         //Returns the new array list.
