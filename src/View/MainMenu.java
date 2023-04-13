@@ -164,77 +164,54 @@ public enum MainMenu {
 
             BorrowBookMenuController bBMC = new BorrowBookMenuController();
             BookBorrowSubMenu[] subMenu = BookBorrowSubMenu.values();
-            boolean askForBookTitle = true;
 
-            if (!bBMC.requestStudentID("Please enter 'Student ID'\n")) {
-                boolean stopMenu = true;
+            boolean isStudentID = bBMC.borrowBook();
+            boolean askForBook = true;
+            if (!isStudentID) {
+
                 do {
                     BorrowBookSubMenuView.borrowBookSubMenuView();
-                    int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
-
-                    switch (subMenu[userInput]) {
+                    int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+                    switch (subMenu[i]) {
                         case YES:
-                            stopMenu = !bBMC.requestStudentID("Please enter 'Student ID'\n");
-                            askForBookTitle = true;
+                            isStudentID = bBMC.borrowBook();
                             break;
                         case NO:
-                            stopMenu = false;
-                            askForBookTitle = false;
+                            askForBook = false;
+                            isStudentID = true;
+                            System.out.println("You are redirecting to the main menu.");
                             break;
-                        default:
-                            System.out.println("Please restart you program. If you see this message again contact the developer.");
-
                     }
-                } while (stopMenu);
+
+                } while (!isStudentID);
             }
 
-            boolean askBookToBorrow = false;
-            if (askForBookTitle) {
-                boolean status = bBMC.requestBookTitle("Please enter 'Book Title'\n");
-                if (!status) {
-                    boolean stopMenu = true;
+            boolean borrowBook = true;
+            if (askForBook) {
+                boolean isBook = bBMC.borrowBook();
+                if (!isBook) {
                     do {
                         BorrowBookSubMenuView.borrowBookSubMenuView();
-                        int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
-
-                        switch (subMenu[userInput]) {
+                        int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+                        switch (subMenu[i]) {
                             case YES:
-                                stopMenu = !bBMC.requestBookTitle("Please enter 'Book Title'\n");
-                                askBookToBorrow = true;
+
+                                isBook = bBMC.borrowBook();
+
                                 break;
                             case NO:
-                                System.out.println("You are redirecting to main menu...\n");
-                                stopMenu = false;
-                                askBookToBorrow = false;
+                                borrowBook = false;
+                                isBook = true;
+                                System.out.println("You are redirecting to the main menu.");
                                 break;
-                            default:
-                                System.out.println("Please restart you program. If you see this message again contact the developer.");
-
                         }
-                    } while (stopMenu);
-                } else if (!bBMC.isBookAvailable() && status) {
-                    askBookToBorrow = false;
-                } else {
-                    askBookToBorrow = true;
+
+                    } while (!isBook);
                 }
             }
-
-            if (askBookToBorrow) {
-                MenuView.borrowBookApprov();
-                int userInput = utils.getUserIntBetween("", 1, subMenu.length) - 1;
-                switch (subMenu[userInput]) {
-                    case YES:
-                        bBMC.borrowBook();
-                        break;
-                    case NO:
-                        System.out.println("You are redirecting to main menu...\n");
-                        break;
-                    default:
-                        System.out.println("Please restart you program. If you see this message again contact the developer.");
-
-                }
+            if(borrowBook) {
+                bBMC.borrowBook();
             }
-
         }
     },
     /**
@@ -244,35 +221,9 @@ public enum MainMenu {
     RETURNBOOK {
         @Override
         public void printRequest() {
-            Constant.StudentSearch.byStudentName = false;
-            Constant.BookSearch.byAuthor = false;
-            QueueController qC = new QueueController();
             ReturnBookController rBC = new ReturnBookController();
-            BorrowBookMenuController bBMC = new BorrowBookMenuController();
-            String studentID = utils.getString("Please enter the StudentID.");
-            String bookTitle = utils.getString("Please enter book title.");
-            boolean bookStatus = rBC.returnBook(studentID, bookTitle);
-            
-            
-            if(bookStatus) {
-                SearchStudentSubMenuController sSMC = new SearchStudentSubMenuController();
-                SearchBookMenuController sBMC = new SearchBookMenuController();
-                sSMC.searchStudentID(studentID);
-                sBMC.searchBookRequest(bookTitle);
-                System.out.println("The information of return successfuly recorded into system. Thank you.\n");
-                if(qC.queueSearch(bookTitle)){
-                    
-                    String studentIDQueue = qC.getStudentID();
-                    
-                    SearchStudentSubMenuController sSSMC = new SearchStudentSubMenuController();
-                    System.out.println("Student on the below information waits for the book please infrom the student. His information recorded into borrow list.");
-                    sSSMC.searchStudentID(studentIDQueue);
-                    
-                    bBMC.borrowBook(studentIDQueue, bookTitle);
-                }
-                
-            }
-            
+            rBC.returnBook();
+
         }
 
     },

@@ -30,19 +30,60 @@ public class BorrowBookMenuController {
     private final QueueController qC = new QueueController();
     private final BookTitleReader bTR;
     private final Utils iU = new Utils();
-    private boolean isBookAvailable;
-    
+
     private Student student;
     private Book book;
 
     public BorrowBookMenuController() {
         this.bS = new SearchAlgorithms();
         this.bTR = new BookTitleReader();
-        
+
     }
-    
-    public void updateBorrowList(){
+
+    public void updateBorrowList() {
         BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet("borrowList.txt");
+        System.out.println(bookTitleSet);
+    }
+
+    public boolean borrowBook() {
+        
+        if (student == null) {
+            return requestStudentID("Please enter the student ID");
+        } else if (student != null && book == null) {
+            return requestBookTitle("Please enter the book title.");
+        } else {
+            if (bookTitleSet.add(book.getTitle().toLowerCase())) {
+                WriterBuffer bW = new WriterBuffer();
+                List<String> borrowInfoList = new ArrayList<>();
+                borrowInfoList.add(student.getId());
+                borrowInfoList.add(book.getTitle());
+
+                bW.writeToFile("borrowList.txt", borrowInfoList);
+                updateBorrowList();
+                System.out.println("Student and book information successfully registered in system.\n");
+                return true;
+            } else {
+                System.out.println("You are redirecting to the main menu.");
+                return true;
+            }
+        }
+
+    }
+
+    public void borrowBook(String sID, String bTitle) {
+
+        if (bookTitleSet.add(bTitle)) {
+            WriterBuffer bW = new WriterBuffer();
+            List<String> borrowInfoList = new ArrayList<>();
+            borrowInfoList.add(sID);
+            borrowInfoList.add(bTitle);
+
+            bW.writeToFile("borrowList.txt", borrowInfoList);
+            updateBorrowList();
+            System.out.println("Student and book information successfully registered in system.\n");
+        } else {
+            System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");
+        }
     }
 
     /**
@@ -50,7 +91,7 @@ public class BorrowBookMenuController {
      *
      * @param prompt String student ID.
      */
-    public boolean requestStudentID(String prompt) {
+    private boolean requestStudentID(String prompt) {
 
         //Book title request
         String studentIDRequest = iU.getString(prompt);
@@ -64,7 +105,7 @@ public class BorrowBookMenuController {
      * @param prompt information to prompt user for request.
      * @return boolean - if the book title exist in the system returns true.
      */
-    public boolean requestBookTitle(String prompt) {
+    private boolean requestBookTitle(String prompt) {
 
         //Book title request
         String bookTitleRequest = iU.getString(prompt);
@@ -85,25 +126,16 @@ public class BorrowBookMenuController {
             System.out.println("Sorry, student registration cannot found in the system.\n");
 
             //isStudentValid set false
-        
             return false;
         } else {
             student = sF.sortedStudentList().get(studentIndex);
             //Student is valid informs user
             System.out.println("Student found in the system successfully.\n");
             //isStuendtValid set true
-           
+
             return true;
         }
 
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public Book getBook() {
-        return book;
     }
 
     /**
@@ -113,77 +145,26 @@ public class BorrowBookMenuController {
      */
     private boolean checkForBook(String bookTitle) {
         int bookIndex = searchForBook(bookTitle);
+       
+        
         //Does binary search for the book title.
         if (bookIndex == -1) {//if binarySearch return is -1 book is not valid
             //inform user for the status of book
             System.out.println("The library does not have that book registered in the system.\n");
-            //isBookValid set false
-            isBookAvailable = false;
+
             return false;
         } else if (bookTitleSet.contains(bF.sortedBookList().get(bookIndex).getTitle())) {
-              book = bF.sortedBookList().get(bookIndex);
+            book = bF.sortedBookList().get(bookIndex);
             System.out.println("Book is not in the library recently. Borrowed by another student.");
-            addQueue(student.getId(), book.getTitle());
-            isBookAvailable = false;
+
+            qC.addQueue(student.getId(), book.getTitle().toLowerCase());
+            
             return true;
         } else {
             book = bF.sortedBookList().get(bookIndex);
             //Inform users book is valid
             System.out.println("The book found in the system successfully.\n");
-            isBookAvailable = true;
             return true;
-        }
-
-    }
-
-    public boolean isBookAvailable() {
-        return isBookAvailable;
-    }
-    
-    public void addQueue(String studentID, String bookName){
-        QueueController restartQ = new QueueController();
-        List<String> data = new ArrayList<>();
-        
-        data.add(studentID);
-        data.add(bookName);
-        
-        qC.writeToFile("queueList.txt", data);
-        restartQ.prepareQueue();
-        System.out.println("Student successfully added into a waiting list. You will be informed when book returned back in library.\n");
-        
-    }
-        
-    
-
-    public void borrowBook() {
-        
-        if (bookTitleSet.add(book.getTitle())) {
-            WriterBuffer bW = new WriterBuffer();
-            List<String> borrowInfoList = new ArrayList<>();
-            borrowInfoList.add(student.getId());
-            borrowInfoList.add(book.getTitle());
-
-            bW.writeToFile("borrowList.txt", borrowInfoList);
-            updateBorrowList();
-            System.out.println("Student and book information successfully registered in system.\n");
-        } else {
-            System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");
-        }
-
-    }
-      public void borrowBook(String sID, String bTitle) {
-        
-        if (bookTitleSet.add(bTitle)) {
-            WriterBuffer bW = new WriterBuffer();
-            List<String> borrowInfoList = new ArrayList<>();
-            borrowInfoList.add(sID);
-            borrowInfoList.add(bTitle);
-
-            bW.writeToFile("borrowList.txt", borrowInfoList);
-            updateBorrowList();
-            System.out.println("Student and book information successfully registered in system.\n");
-        } else {
-            System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");
         }
 
     }
@@ -195,7 +176,7 @@ public class BorrowBookMenuController {
      * @return student index if cannot found -1.
      */
     private int searchForStudent(String studentID) {
-     
+
         return bS.binarySearch(sF.sortedStudentList(), studentID, 0, sF.sortedStudentList().size() - 1);
     }
 
@@ -206,7 +187,7 @@ public class BorrowBookMenuController {
      * @return book index if cannot found -1.
      */
     private int searchForBook(String bookTitle) {
- 
+
         return bS.binarySearch(bF.sortedBookList(), bookTitle, 0, bF.sortedBookList().size() - 1);
     }
 
