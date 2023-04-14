@@ -47,8 +47,7 @@ public class StartProgram {
                 case BORROWBOOK -> mM[userInput].printRequest();
                 case RETURNBOOK -> mM[userInput].printRequest();
                 
-                case STUDENTBORROWLIST -> {
-                }
+                case STUDENTBORROWLIST -> mM[userInput].printRequest();
                 case EXIT -> {
                     mM[userInput].printRequest();
                     exit = false;

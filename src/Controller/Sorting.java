@@ -17,7 +17,7 @@ public interface Sorting<T extends Comparable<T>> {
      * Implements bubble sorting method for objects
      * @param arr object array to sort.
      */
-//    public void bubbleSorting(T[] arr);
+    public void bubbleSorting(T[] arr);
  
     public void insertionSorting(T[] arr);
 }

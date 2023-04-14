@@ -5,6 +5,7 @@
 package View;
 
 import Controller.Menu.BorrowBookMenuController;
+import Controller.Menu.BorrowListController;
 import Controller.Menu.ReturnBookController;
 import Controller.Menu.SearchBookMenuController;
 import Controller.Menu.SearchStudentSubMenuController;
@@ -227,7 +228,8 @@ public enum MainMenu {
     STUDENTBORROWLIST {
         @Override
         public void printRequest() {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            BorrowListController bLC = new BorrowListController();
+            bLC.showBorrowList("borrowList.txt");
         }
 
     },

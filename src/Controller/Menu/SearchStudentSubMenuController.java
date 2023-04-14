@@ -50,7 +50,7 @@ public class SearchStudentSubMenuController {
         searchForAStudent(student);
     }
 
-    private void searchForAStudent(String studentInfo) {
+    private void  searchForAStudent(String studentInfo) {
 
         //new student factory
         StudentFactory sF = new StudentFactory();
@@ -68,5 +68,6 @@ public class SearchStudentSubMenuController {
             sSIV.showStudentInfo(studentList.get(studentIndex));
 
         }
+        
     }
 }

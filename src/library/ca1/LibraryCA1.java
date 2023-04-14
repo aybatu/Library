@@ -4,13 +4,9 @@
  */
 package library.ca1;
 
-import Controller.SearchAlgorithms;
-import Controller.SortAlgorithms;
+
 import Controller.StartProgram;
-import Utils.Utils;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+
 /**
  *
  * @author aybatukerkukluoglu
@@ -21,21 +17,10 @@ public class LibraryCA1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        //New Start Program object created
         StartProgram sP = new StartProgram();
+        //Followed method starts the library application.
         sP.initiateLibrary();
-//Student newS = new Student("1", "1", "2", "a");
-//Student newS2 = new Student("2", "3", "5", "a");
-//Book newB = new Book("e578b06e-66e9-413a-b0e2-d387d00c907d", "2", "a");
-//Book newB2 = new Book("e578b06e-66e9-413a-b0e2-d387d00c907d", "2", "a");
-//        BookBorrowRecord test = new BookBorrowRecord(newS, newB);
-//        BookBorrowRecord test2 = new BookBorrowRecord(newS, newB2);
-//        HashSet<BookBorrowRecord> set = new HashSet<>();
-//        set.add(test);
-//        set.add(test2);
-//        System.out.println(set.size()5);
-
-       
     }
 
 }

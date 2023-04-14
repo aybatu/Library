@@ -39,4 +39,5 @@ public class Constant {
         //Defines student search by name or ID.
         public static boolean byStudentName = true;
     }
+
 }

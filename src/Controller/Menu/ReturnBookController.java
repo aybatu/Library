@@ -15,8 +15,7 @@ import Utils.Utils;
  */
 public class ReturnBookController {
     private Utils u = new Utils();
-    private static int bTIndex = 1;
-    private static int iDIndex = 0;
+   
     
     private boolean returnBook(String studentID, String bookTitle) {
         
