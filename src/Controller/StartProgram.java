@@ -17,12 +17,22 @@ import View.MenuView;
 public class StartProgram {
 
     /**
+     * Empty constructor.
+     */
+    public StartProgram() {
+    }
+
+    /**
      * Initiates Library program and provides menu rotation.
      */
     public void initiateLibrary() {
+        // new QeueueController object.
         QueueController startQ = new QueueController();
+        //Student Queue is loaded on memory
         startQ.prepareQueue();
+        //BorrowBookMenuController object.
         BorrowBookMenuController bBMC = new BorrowBookMenuController();
+        //borrowList is written on memory
         bBMC.updateBorrowList();
         //New Utils object.
         Utils utils = new Utils();
@@ -40,24 +50,33 @@ public class StartProgram {
             int userInput = utils.getUserIntBetween("Please select item you would like to query.", 1, mM.length) - 1;
             //Main menu switch-case statement.
             switch (mM[userInput]) {
-                case SEARCHBOOK -> mM[userInput].printRequest();
-                case LISTBOOKS -> mM[userInput].printRequest();
-                case SEARCHSTUDENT -> mM[userInput].printRequest();
-                case STUDENTLIST -> mM[userInput].printRequest();
-                case BORROWBOOK -> mM[userInput].printRequest();
-                case RETURNBOOK -> mM[userInput].printRequest();
-                
-                case STUDENTBORROWLIST -> mM[userInput].printRequest();
+                //Menu items.
+                case SEARCHBOOK ->
+                    mM[userInput].printRequest();
+                case LISTBOOKS ->
+                    mM[userInput].printRequest();
+                case SEARCHSTUDENT ->
+                    mM[userInput].printRequest();
+                case STUDENTLIST ->
+                    mM[userInput].printRequest();
+                case BORROWBOOK ->
+                    mM[userInput].printRequest();
+                case RETURNBOOK ->
+                    mM[userInput].printRequest();
+                case STUDENTBORROWLIST ->
+                    mM[userInput].printRequest();
                 case EXIT -> {
                     mM[userInput].printRequest();
                     exit = false;
                 }
-                default -> System.out.println("Please restart you program. If you see this message again contact the developer.");
+                //if there is no error default statement should not work.
+                default ->
+                    System.out.println("Please restart you program. If you see this message again contact the developer.");
 
             }
             //search for a specific book by its name.
             //Prompts book list either ordered by author or title
-            
+
         } while (exit);
     }
 }

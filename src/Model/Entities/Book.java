@@ -13,8 +13,11 @@ import Utils.Constant;
 public class Book implements Comparable<Book> {
 
     //PROPERTIES
+    //ID of the book String
     private String id;
+    //title of the book String
     private String title;
+    //Author full name of the book String.
     private String authorFN;
 
     /**

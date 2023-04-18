@@ -8,8 +8,6 @@ import Controller.Menu.BorrowBookMenuController;
 import Controller.Menu.BorrowListController;
 import Controller.Menu.ReturnBookController;
 import Controller.Menu.SearchBookMenuController;
-import Controller.Menu.SearchStudentSubMenuController;
-import Controller.Queue.QueueController;
 import Utils.Constant;
 import Utils.Utils;
 
@@ -162,20 +160,29 @@ public enum MainMenu {
             Constant.StudentSearch.byStudentName = false;
             //Book search will be done by a book title not author name.
             Constant.BookSearch.byAuthor = false;
-
+            //new BorrowBookMenuController object.
             BorrowBookMenuController bBMC = new BorrowBookMenuController();
+            //new BookBorrowSubMenu object.
             BookBorrowSubMenu[] subMenu = BookBorrowSubMenu.values();
-
+            //borrowBook method status stored in isStudentID
             boolean isStudentID = bBMC.borrowBook();
+            //askForBook variable initially set true, if student id is valid next step will be applied for a book name.
             boolean askForBook = true;
             if (!isStudentID) {
-
+                //do-while loop
                 do {
+                    //BorrowBookSubMenu view to inform user menu selection.
                     BorrowBookSubMenuView.borrowBookSubMenuView();
+                    //User input for the menu selection
                     int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+                    //switch-case for the sub menu.
+                    //if student id fetch is failed asks for next time if user wants to try again or not.
                     switch (subMenu[i]) {
-                        case YES -> isStudentID = bBMC.borrowBook();
+                        case YES ->
+                            //when selected yes tries again to find student id.
+                            isStudentID = bBMC.borrowBook();
                         case NO -> {
+                            //stops loop and set next step false, redirecting back to main menu.
                             askForBook = false;
                             isStudentID = true;
                             System.out.println("You are redirecting to the main menu.");
@@ -185,16 +192,25 @@ public enum MainMenu {
                 } while (!isStudentID);
             }
 
+            //borrowBook set true initially for next step after getting book title.
             boolean borrowBook = true;
             if (askForBook) {
+                //checks for the book name if its valid or not
                 boolean isBook = bBMC.borrowBook();
+                //if its not valid ask user if would like try again.
                 if (!isBook) {
+                    //do - while loop
                     do {
+                        //Menu view for the sub menu.
                         BorrowBookSubMenuView.borrowBookSubMenuView();
+                        //user input.
                         int i = utils.getUserIntBetween("", 1, subMenu.length) - 1;
+                        //If user selected yes, borrow boook method will be called again.
                         switch (subMenu[i]) {
-                            case YES -> isBook = bBMC.borrowBook();
+                            case YES ->
+                                isBook = bBMC.borrowBook();
                             case NO -> {
+                                //if user choice is no next step set false, and loop set false.
                                 borrowBook = false;
                                 isBook = true;
                                 System.out.println("You are redirecting to the main menu.");
@@ -204,7 +220,9 @@ public enum MainMenu {
                     } while (!isBook);
                 }
             }
-            if(borrowBook) {
+            //if borrow book is true
+            if (borrowBook) {
+                //last step is applied by calling borrowBook method last time.
                 bBMC.borrowBook();
             }
         }
@@ -216,7 +234,9 @@ public enum MainMenu {
     RETURNBOOK {
         @Override
         public void printRequest() {
+            //New ReturnBookController.
             ReturnBookController rBC = new ReturnBookController();
+            //returnBook method called.
             rBC.returnBook();
 
         }
@@ -228,7 +248,9 @@ public enum MainMenu {
     STUDENTBORROWLIST {
         @Override
         public void printRequest() {
+            //New BorrowListController object created.
             BorrowListController bLC = new BorrowListController();
+            //showBorrowList called for the file borrowList.txt.
             bLC.showBorrowList("borrowList.txt");
         }
 
@@ -239,6 +261,7 @@ public enum MainMenu {
     EXIT {
         @Override
         public void printRequest() {
+            //end of the application.
             System.out.println("Goodbye. Have a nice day.");
         }
 

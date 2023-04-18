@@ -68,34 +68,56 @@ public class Utils {
         return userInput;
     }
 
+    /**
+     * Removes a line from a provided text file.
+     *
+     * @param fileName file name to go through.
+     * @param data data to delete.
+     * @return A Boolean value for the status.
+     */
     public boolean removeLine(String fileName, String data) {
+        //Creates a file with provided file name.
         File inputFile = new File(fileName);
+        //Creates a temp text file.
         File tempFile = new File("temp.txt");
+        //status initially set false.
         boolean status = false;
+        //A simple try-catch statement.
         try {
+            //A new BufferedReader object created.
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            //A new BufferedReader object is created.
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
+            //stores data parameter to lineToRemove variable.
             String lineToRemove = data;
+            //Null string variable for the current line.
             String currentLine;
 
+            //a while loop checks file has line and stores the line info to currentLine variable.
             while ((currentLine = reader.readLine()) != null) {
                 // trim newline when comparing with lineToRemove
                 String trimmedLine = currentLine.trim();
+                //if trimmedLine is equals to lineToRemove
                 if (trimmedLine.toLowerCase().equals(lineToRemove.toLowerCase())) {
+                    //status is set true.
                     status = true;
+                    //Continue to loop.
                     continue;
                 }
+                //Writes the current line to temp file and adds a line separator..
                 writer.write(currentLine + System.getProperty("line.separator"));
             }
-
+            //saves temps file
             writer.close();
+            //saves data file.
             reader.close();
         } catch (Exception e) {
             System.out.println("File could not be found.");
         }
+        // renames the temp file with the input file name.
         boolean successful = tempFile.renameTo(inputFile);
-        
+
         return status;
     }
 

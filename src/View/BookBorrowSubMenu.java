@@ -9,6 +9,7 @@ package View;
  * @author aybatukerkukluoglu
  */
 public enum BookBorrowSubMenu {
+    //Just simple enum for YES or NO option for the menu.
     YES,
     NO;
 }

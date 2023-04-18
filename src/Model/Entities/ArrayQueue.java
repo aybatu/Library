@@ -1,6 +1,5 @@
 package Model.Entities;
 
-
 public interface ArrayQueue {
 
     /**
@@ -9,28 +8,28 @@ public interface ArrayQueue {
      * @param newElement
      * @return false is capacity full
      */
-    public boolean Enqueue(String newElement);
+    public boolean enqueue(String newElement);
 
     /**
      * Removes an element from the front of the queue
      *
      * @return null if queue is empty
      */
-    public String Dequeue();
+    public String dequeue();
 
     /**
      * First element of the queue without removing it
      *
      * @return null if empty
      */
-    public String First();
+    public String first();
 
     /**
      * Last element of the queue without removing it
      *
      * @return null if empty
      */
-    public String Last();
+    public String last();
 
     /**
      * Number of elements in the queue

@@ -16,16 +16,24 @@ import java.util.List;
  * @author aybatukerkukluoglu
  */
 public class SearchStudentSubMenuController {
+
     //PROPERTIES
     //new binarysearch object.
-    private SearchAlgorithms bS = new SearchAlgorithms();
+    private final SearchAlgorithms bS = new SearchAlgorithms();
     //new Utils object
-    Utils iU = new Utils();
+    private final Utils iU = new Utils();
     //NewShowStudentView object
-    private ShowStudentInfoView sSIV = new ShowStudentInfoView();
-    
+    private final ShowStudentInfoView sSIV = new ShowStudentInfoView();
+
+    /**
+     * Empty constructor.
+     */
+    public SearchStudentSubMenuController() {
+    }
+
     /**
      * Request a prompt user to enter an ID for student.
+     *
      * @param prompt String student ID.
      */
     public void requestStudentID(String prompt) {
@@ -35,7 +43,7 @@ public class SearchStudentSubMenuController {
         //Called method searches for the book name through the book list.
         searchForAStudent(student);
     }
-    
+
     public void searchStudentID(String studentInfo) {
 
         //Called method searches for the book name through the book list.
@@ -50,7 +58,7 @@ public class SearchStudentSubMenuController {
         searchForAStudent(student);
     }
 
-    private void  searchForAStudent(String studentInfo) {
+    private void searchForAStudent(String studentInfo) {
 
         //new student factory
         StudentFactory sF = new StudentFactory();
@@ -68,6 +76,6 @@ public class SearchStudentSubMenuController {
             sSIV.showStudentInfo(studentList.get(studentIndex));
 
         }
-        
+
     }
 }

@@ -7,20 +7,30 @@ package Controller;
 import java.util.List;
 
 /**
- *Search interface has some methods to search objects lists.
+ * Search interface has some methods to search objects lists.
+ *
  * @author aybatukerkukluoglu
  * @param <T> Generic type any object with compatible comparable interface.
  */
 public interface Search<T extends Comparable<T>> {
+
     /**
      * Implements binary search for requested target
+     *
      * @param list object array list to search through.
      * @param target is the object to search.
      * @param start starting point to start search.
      * @param end end point to search up to.
-     * @return 
+     * @return
      */
     public int binarySearch(List<T> list, String target, int start, int end);
-    
+
+    /**
+     * A simple linear search method.
+     *
+     * @param list list of object.
+     * @param target searching object.
+     * @return index of the target element.
+     */
     public int linearSearch(List<T> list, String target);
 }

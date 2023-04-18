@@ -49,7 +49,7 @@ public class StudentFactory {
         Sorting iSort = new SortAlgorithms();
 
         //studentArr sorted bu bubbleSorting method.
-        iSort.insertionSorting(studentArr);
+        iSort.divideMerge(studentArr);
         //All object of studentArr added to studentList array list.
         studentList.addAll(Arrays.asList(studentArr));
         //Returns the new array list.

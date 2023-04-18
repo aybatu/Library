@@ -6,9 +6,7 @@ package Controller.Menu;
 
 import Controller.Book.BookFactory;
 import Controller.SearchAlgorithms;
-import Controller.Student.StudentFactory;
 import Model.Entities.Book;
-import Model.Entities.Student;
 import Utils.Utils;
 import java.util.List;
 
@@ -20,12 +18,19 @@ public class SearchBookMenuController {
 
     //PROPERTIES
     //new binarysearch object.
-    private SearchAlgorithms bS = new SearchAlgorithms();
+    private final SearchAlgorithms bS = new SearchAlgorithms();
     //new Utils object
-    Utils iU = new Utils();
+    private final Utils iU = new Utils();
+
+    /**
+     * Empty constructor.
+     */
+    public SearchBookMenuController() {
+    }
 
     /**
      * Request a book title to search through book list.
+     *
      * @param prompt Prompts information for the user
      */
     public void requestBookTitle(String prompt) {
@@ -59,7 +64,7 @@ public class SearchBookMenuController {
             System.out.println("Followed information for the book bellow:\n");
             System.out.println("Book ID: " + bookList.get(bookIndex).getId());
             System.out.println("Book Author: " + bookList.get(bookIndex).getAuthor());
-            System.out.println("Book Title: " + bookList.get(bookIndex).getTitle()+"\n");
+            System.out.println("Book Title: " + bookList.get(bookIndex).getTitle() + "\n");
         }
     }
 }

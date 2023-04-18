@@ -5,8 +5,6 @@
 package Controller.Book;
 
 import Controller.SortAlgorithms;
-import Controller.SortAlgorithms;
-import Controller.Sorting;
 import Controller.Sorting;
 import Model.Entities.Book;
 import Utils.Constant;
@@ -16,14 +14,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
  *
  * @author aybatukerkukluoglu
  */
 public class BookFactory {
     //PROPERTIES
-    
+
     //regxPattern to divide strings read from the txt file.
     private static final String regxPattern = " ";
     //Indexes for created new array with splitted regxPattern
@@ -35,9 +32,10 @@ public class BookFactory {
     private static final int aFIndx = 2;
     //book title start index.
     private static final int bTIndx = 3;
-    
+
     /**
      * The method creates a sorted Book ArrayList by Author name.
+     *
      * @return array list of Book.
      */
     public List<Book> sortedBookList() {
@@ -47,17 +45,19 @@ public class BookFactory {
         Book[] bookArr = retrieveBookList(Constant.Book.bookListFile);
         //A new SortAlgorithms object.
         Sorting iSort = new SortAlgorithms();
-        
+
         //bookArr sorted bu bubbleSorting method.
-        iSort.insertionSorting(bookArr);
+        iSort.divideMerge(bookArr);
         //All object of bookArr added to bookList array list.
         bookList.addAll(Arrays.asList(bookArr));
         //Returns the new array list.
         return bookList;
     }
-    
+
     /**
-     * It's a private method creates a book list by reading from a provided text file.
+     * It's a private method creates a book list by reading from a provided text
+     * file.
+     *
      * @param fileName File name to read for the information.
      * @return a Book object array
      */
@@ -75,7 +75,7 @@ public class BookFactory {
         for (int i = 0; i < bookListInfo.size(); i++) {
             //String array bookListInfo splited txt arrays
             String[] bookInfo = utils.strSplitter(bookListInfo.get(i), regxPattern);
-            
+
             //BookID assigned to BookID retrevied from the txt file.
             String bookID = bookInfo[bookIDIndx];
             //Autjor full name stored to aFN retrevied from the txt file.
@@ -83,25 +83,24 @@ public class BookFactory {
             //bT assigned to Book Title retrevied from the txt file.
             String bT = "";
             //A simple for loop checks for the rest of the indexes of bookInfo array.
-            for(int j = bTIndx; j < bookInfo.length; j++) {
+            for (int j = bTIndx; j < bookInfo.length; j++) {
                 //If the index of the array is last one addes it to 'bT' without a space.
-                if(j == bookInfo.length - 1) {
+                if (j == bookInfo.length - 1) {
                     bT += bookInfo[j].trim();
-                }else {//else addes the string in the index to 'bT' with a space.
+                } else {//else addes the string in the index to 'bT' with a space.
                     bT += bookInfo[j].trim() + " ";
                 }
             }
-           
+
             //Creates a new book with retrieved data.
             Book newBook = new Book(bookID, aFN, bT);
-            
+
             //addes new book into bookArr
             bookArr[i] = newBook;
-            
-        } 
+
+        }
         //returns bookArr.
         return bookArr;
     }
-    
-    
+
 }

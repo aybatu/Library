@@ -23,44 +23,79 @@ import java.util.List;
  */
 public class BorrowBookMenuController {
 
+    //PROPERTIES
+    //BookTitle set
     private static HashSet<String> bookTitleSet;
+    //Null SearchAlgorithms pointer.
     private final SearchAlgorithms bS;
+    //Book Factory object.
     private final BookFactory bF = new BookFactory();
+    //Student Factory object.
     private final StudentFactory sF = new StudentFactory();
+    //QeueueController object.
     private final QueueController qC = new QueueController();
+    //null bookTitleReader pointer
     private final BookTitleReader bTR;
+    //Utils object.
     private final Utils iU = new Utils();
-
+    private final static String borrowListFile = "borrowList.txt";
+    //Empty student pointer
     private Student student;
+    //Empty book pointer.
     private Book book;
 
+    /**
+     * BorrowBookMenyController constructor.
+     */
     public BorrowBookMenuController() {
+        //Creates new SearchAlgorithms object and stores in to 'bS'
         this.bS = new SearchAlgorithms();
+        //Creates new BookTitleReader object and stores in to 'bTR'
         this.bTR = new BookTitleReader();
 
     }
 
+    /**
+     * Updates book title set object from the data text file.
+     */
     public void updateBorrowList() {
-        BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet("borrowList.txt");
-     
+        //Book title set is updated by borrow list file.
+        BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet(borrowListFile);
+
     }
 
+    /**
+     * Records a borrow data for the provided student and book information.
+     *
+     * @return Boolean - true if information is recorded, false if there is an
+     * error.
+     */
     public boolean borrowBook() {
-        
+        //if student property is null
         if (student == null) {
+            //sents user a request for studentid
             return requestStudentID("Please enter the student ID");
         } else if (student != null && book == null) {
+            //if student is not null and book is null sends a reuqest for book title
             return requestBookTitle("Please enter the book title.");
         } else {
+            //if book title is added into set
             if (bookTitleSet.add(book.getTitle().toLowerCase())) {
+                //create a new writerBuffer object.
                 WriterBuffer bW = new WriterBuffer();
+                //create a new String List and store in borrowInfoList.
                 List<String> borrowInfoList = new ArrayList<>();
+                //Add student id into borrowInfoList
                 borrowInfoList.add(student.getId());
+                //Add book title into borrowInfoList.
                 borrowInfoList.add(book.getTitle().toLowerCase());
-
-                bW.writeToFile("borrowList.txt", borrowInfoList);
+                //Pass borrowInfoList to file writer to write into borrowlist file.
+                bW.writeToFile(borrowListFile, borrowInfoList);
+                //updates borrowList.
                 updateBorrowList();
+                //informs user for the status
                 System.out.println("Student and book information successfully registered in system.\n");
+                //return true.
                 return true;
             } else {
                 System.out.println("You are redirecting to the main menu.");
@@ -70,18 +105,30 @@ public class BorrowBookMenuController {
 
     }
 
+    /**
+     * Borrows book provided studentId and book title information.
+     *
+     * @param sID String student id.
+     * @param bTitle String book title.
+     */
     public void borrowBook(String sID, String bTitle) {
-
+        //if book is added to book title set
         if (bookTitleSet.add(bTitle)) {
+            //new writerbuffer object created.
             WriterBuffer bW = new WriterBuffer();
+            //new Arraylist created
             List<String> borrowInfoList = new ArrayList<>();
+            //Student and book info added into the arrayList
             borrowInfoList.add(sID);
             borrowInfoList.add(bTitle);
-
-            bW.writeToFile("borrowList.txt", borrowInfoList);
+            //info is writtten into the borrowList file.
+            bW.writeToFile(borrowListFile, borrowInfoList);
+            //BorrowList is updated.
             updateBorrowList();
+            //information for the user.
             System.out.println("Student and book information successfully registered in system.\n");
         } else {
+            //If book title is not added into borrow list set it is taken by another student.
             System.out.println("Book has been borrow by another student. Recently not in the library. Would you like to add student to waiting queue for the book?\n");
         }
     }
@@ -145,7 +192,7 @@ public class BorrowBookMenuController {
      */
     private boolean checkForBook(String bookTitle) {
         int bookIndex = searchForBook(bookTitle);
-       
+
         updateBorrowList();
         //Does binary search for the book title.
         if (bookIndex == -1) {//if binarySearch return is -1 book is not valid
@@ -158,7 +205,7 @@ public class BorrowBookMenuController {
             System.out.println("Book is not in the library recently. Borrowed by another student.");
 
             qC.addQueue(student.getId(), book.getTitle().toLowerCase());
-            
+
             return true;
         } else {
             book = bF.sortedBookList().get(bookIndex);
