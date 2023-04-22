@@ -19,7 +19,7 @@ public class QueueController {
     //PROPERTIES.
     private static String queueListFile = "queueList.txt";
     //Null MyOwnQueue pointer.
-    private static MyOwnQueue myQ;
+    private MyOwnQueue myQ;
     //bookTitle index.
     private static final int bTIndex = 1;
     //student id index.
@@ -75,7 +75,7 @@ public class QueueController {
      *
      * @return MyOwnQeueu object.
      */
-    public static MyOwnQueue getMyQ() {
+    public MyOwnQueue getMyQ() {
         return myQ;
     }
 

@@ -5,8 +5,6 @@
 package Controller.Student;
 
 import Controller.SortAlgorithms;
-import Controller.SortAlgorithms;
-import Controller.Sorting;
 import Controller.Sorting;
 import Model.Entities.Student;
 import Utils.Constant;

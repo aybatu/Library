@@ -20,7 +20,10 @@ public class SortAlgorithms<T extends Comparable<T>> implements Sorting<T> {
     }
 
     /**
-     * Method sorts comparable objects by insertion sort algorithm
+     * Method sorts comparable objects by insertion sort algorithm.
+     *
+     * Method is inactive, can be deleted or can be implemented instead of
+     * mergeSort method.
      *
      * @param arr an array of objects.
      */
@@ -47,7 +50,8 @@ public class SortAlgorithms<T extends Comparable<T>> implements Sorting<T> {
     }
 
     /**
-     * Sorting interface method to sort comparable object arrays.
+     * Sorting interface method to sort comparable object arrays. 
+     * Method is inactive, can be deleted or can be implemented instead of mergeSort method.
      *
      * @param arr an object array to sort.
      */

@@ -60,7 +60,7 @@ public class BorrowBookMenuController {
      */
     public void updateBorrowList() {
         //Book title set is updated by borrow list file.
-        BorrowBookMenuController.bookTitleSet = bTR.bookBorrowTitleSet(borrowListFile);
+        this.bookTitleSet = bTR.bookBorrowTitleSet(borrowListFile);
 
     }
 

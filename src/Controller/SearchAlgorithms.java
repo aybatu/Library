@@ -57,7 +57,7 @@ public class SearchAlgorithms implements Search {
 
     /**
      * Simple linear search.
-     *
+     * Method is inactive, can be deleted or can be implemented instead of binary search method.
      * @param list list of objects to search.
      * @param target object to search.
      * @return index of the object in the list.

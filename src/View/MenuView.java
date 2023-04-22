@@ -53,7 +53,7 @@ public class MenuView {
     public static void studentSearchMenuView() {
         
         System.out.println("\n1. Search by a student name.");
-        System.out.println("2. Serach by a studnet ID.");
+        System.out.println("2. Search by a studnet ID.");
         System.out.println("3. Exit.\n");
     }
 
